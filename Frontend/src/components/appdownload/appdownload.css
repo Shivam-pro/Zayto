@@ -1,0 +1,51 @@
+.appdownload{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.appdownload h2{
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+.download-image{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.googleplay-image{
+    width: 12.5rem;
+    height: 3.6rem;
+    /* overflow: hidden; */
+}
+.appstore-image{
+    width: 12.5rem;
+    height: 3.5rem;
+}
+.googleplay-image img{
+    width: 100%;
+    height: 100%;
+}
+.appstore-image img{
+    width: 100%;
+    height: 100%;
+}
+.googleplay-image img:hover{
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+.appstore-image img:hover{
+    transform: scale(1.02);
+    transition: 0.5s;
+}
+@media (max-width: 700px) {
+    .download-image{
+        flex-direction: column;
+    }
+    .appdownload h2{
+        font-size: 25px;
+        text-align: center;
+    }
+}

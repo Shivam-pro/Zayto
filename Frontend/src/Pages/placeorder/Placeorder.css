@@ -1,0 +1,49 @@
+.place-order-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    gap: 10px;
+}
+.place-order-right{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.place-order-right h2{
+    margin-bottom: 10px;
+}
+.delivery-info{
+    width: 50%;
+}
+.delivery-info h1{
+    margin-bottom: 40px;
+}
+.form-info{
+    gap: 10px;
+}
+.form-info input{
+    padding: 6px 10px;
+}
+.form-design{
+    display: flex;
+    gap: 10px;
+}
+.form-design input{
+    width: 100%;
+}
+@media (max-width: 600px) {
+    .place-order-container{
+        margin-top: 40px;
+    }
+    .delivery-info h1{
+        text-align: center;
+    }
+    .delivery-info{
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    .place-order-right{
+        width: 100%;
+    }
+}

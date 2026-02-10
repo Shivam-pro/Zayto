@@ -1,0 +1,68 @@
+.list-table-format{
+    display: grid;
+    grid-template-columns: 0.5fr 2fr 1fr 1fr 0.5fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    border: 1px solid #cacaca;
+    font-size: 13px;
+}
+.list-table-format-edit{
+    position: relative;
+    display: grid;
+    grid-template-columns: 0.5fr 3fr 1fr 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    border: 1px solid #cacaca;
+    font-size: 13px;
+}
+.list-table-format img{
+    object-fit: cover;
+    width: 80px;
+    height: 80px;
+}
+.list-table-format-edit img{
+    object-fit: cover;
+    width: 60px;
+    height: 60px;
+}
+.list-table-format-edit input{
+    border: none;
+    outline: none;
+}
+.list-table-format-edit .edit-name{
+    width: fit-content;
+}
+.list-table-format-edit .edit-category{
+    width: 5rem;
+}
+.list-table-format-edit .edit-price{
+    width: 50px;
+}
+.list-table-format.title{
+    background-color: #f9f9f9;
+}
+.cross{
+    cursor: pointer;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
+.edit{
+    cursor: pointer;
+}
+.edit-btn{
+    position: absolute;
+    right: 20px;
+}
+@media (max-width: 600px) {
+    .list-table-format{
+        grid-template-columns: 1fr 3fr 1fr;
+        gap: 15px;
+    }
+    .list-table-format.title{
+        display: none;
+    }
+}

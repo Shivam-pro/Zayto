@@ -1,0 +1,54 @@
+.header{
+    height: 400px;
+    width: 100%;
+    background-image: url('/src/Assets/food-set-dishes-on-table.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 2rem 5rem;
+    color: white;
+    margin-bottom: 34px;
+}
+.header-content{
+    width: 70%;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    animation: fadein 3s;
+}
+.header-top{
+    font-size: 1.5rem;
+}
+.header-middle{
+    font-size: 15px;
+}
+.header-btn{
+    align-self: flex-start;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+}
+@media (max-width: 700px) {
+    .header{
+        padding: 1rem 2rem;
+        height: 400px;
+        background-position: center;
+    }
+    .header-content{
+        width: 90%;
+    }
+    .header-top{
+        font-size: 15px;
+    }
+    .header-middle{
+        font-size: 12px;
+    }
+    /* .header-btn{
+        padding: 7px 10px;
+        font-size: 10px;
+    } */
+}

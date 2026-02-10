@@ -1,0 +1,58 @@
+.login{
+    z-index: 1;
+    position: absolute;
+    background-color: #00000090;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-container{
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    animation: fadein 0.5s;
+}
+.login-heading{
+    display: flex;
+    justify-content: space-between;
+}
+.input-box{
+    padding: 7px 10px;
+}
+.login-btn{
+    background-color: tomato;
+    color: white;
+    font-size: 17px;
+    border: none;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.confirm{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.login-heading .fa-solid{
+    font-size: 20px;
+    cursor: pointer;
+}
+.click-here{
+    color: tomato;
+    cursor: pointer;
+}
+.checkbox{
+    cursor: pointer;
+}
+
+@media (max-width: 700px) {
+    .login-container{
+        width: 90%;
+    }
+}

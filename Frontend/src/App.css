@@ -1,0 +1,19 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+.App{
+  margin: auto;
+  width: 80%;
+}
+.no-scroll {
+  overflow: hidden;
+}
+@media (max-width: 500px) {
+  .App{
+    width: 90%;
+  }
+}
