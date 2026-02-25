@@ -6,9 +6,12 @@ export const Storecontext = createContext(null);
 const StoreContextProvier = (props) => {
     const [cartItems, setCartItems] = useState({});
     const url = process.env.REACT_APP_BACKEND_URL || "http://localhost:3000";
+    const geoapikey = process.env.REACT_APP_GEOAPI;
     const [token, setToken] = useState("");
     const [food_list, setFoodList] = useState([]);
     const [loader, setLoader] = useState(false);
+    const [longitude, setLongitude] = useState(localStorage.getItem("longitude"));
+    const [latitude, setLatitude] = useState(localStorage.getItem("latitude"));
 
     const addToCart = async (itemId) => {
         if (!cartItems[itemId]) {
@@ -45,11 +48,9 @@ const StoreContextProvier = (props) => {
         if(response.data.success){
             setFoodList(response.data.data);
             setLoader(false);
-            console.log(response);
         }
         else{
             setLoader(true);
-            console.log("loader", loader);
         }
     }
 
@@ -85,6 +86,11 @@ const StoreContextProvier = (props) => {
         setToken,
         loader,
         setLoader,
+        setLongitude,
+        setLatitude,
+        geoapikey,
+        latitude,
+        longitude,
     }
 
     return (

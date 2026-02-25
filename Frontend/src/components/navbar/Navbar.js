@@ -1,4 +1,4 @@
-import React, { act, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import './navbar.css'
 import { assets } from '../../Assets/assets'
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,6 +10,8 @@ const Navbar = ({showlogin}) => {
     const navigate = useNavigate();
     const logout = () =>{
         localStorage.removeItem("token");
+        localStorage.removeItem("longitude");
+        localStorage.removeItem("latitude");
         setToken("");
         navigate("/");
     }

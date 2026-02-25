@@ -9,22 +9,24 @@ import { useState, useEffect } from 'react';
 import Login from './components/login/Login';
 import Verify from './Pages/verify/Verify';
 import MyOrders from './Pages/myOrders/MyOrders';
+import TrackOrder from './Pages/trackOrder/TrackOrder';
 function App() {
-  const [showlogin, setShowlogin] = useState(false)
+  const [showlogin, setShowlogin] = useState(false);
   useEffect(() => {
     document.body.classList.toggle('no-scroll', showlogin);
   }, [showlogin]);
   return (
     <>
-      {showlogin?<Login showlogin={setShowlogin}/>:<></>}
+      {showlogin ? <Login showlogin={setShowlogin} /> : <></>}
       <div className="App">
-        <Navbar showlogin={setShowlogin}/>
+        <Navbar showlogin={setShowlogin} />
         <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/cart' element={<Cart/>}/>
-          <Route path='/order' element={<Placeorder/>}/>
-          <Route path='/verify' element={<Verify/>}/>
-          <Route path='/myorders' element={<MyOrders/>}/>
+          <Route path='/' element={<Home />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/order' element={<Placeorder />} />
+          <Route path='/verify' element={<Verify />} />
+          <Route path='/myorders' element={<MyOrders />} />
+          <Route path='/trackorder' element={<TrackOrder />} />
         </Routes>
       </div>
       <Footer />
