@@ -1,12 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "./trackorder.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import axios from "axios"
+import { toast } from 'react-toastify';
 
 const TrackOrder = ({ url, user, longitude, latitude, setLatitude, setLongitude }) => {
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [spinner, setSpinner] = useState(false);
+  const [otp, setOtp] = useState("")
   const nevigate = useNavigate()
   const location = useLocation();
   const geoapikey = import.meta.env.VITE_GEOAPI;
@@ -19,6 +23,33 @@ const TrackOrder = ({ url, user, longitude, latitude, setLatitude, setLongitude 
   const markAsDelivered = async (orderId) => {
     await axios.post(url + "/api/order/status", { orderId: orderId, status: "Delivered" });
     nevigate("/allorders");
+  }
+
+  const sendOtp = async(orderId)=>{
+    setSpinner(true)
+    const send = await axios.post(url + "/api/delivery/sendotp", {orderId: orderId});
+    if(send.data.success){
+      setSpinner(false);
+      setIsSubmit(true);
+      toast.success(send.data.message);
+    }
+    else{
+      toast.error(send.data.message);
+    }
+  }
+  const submitOtp = async(orderId)=>{
+    if(!otp){
+      toast.error("Please Enter the otp");
+    }
+    const verify = await axios.post(url + "/api/delivery/verifyotp", {orderId: orderId, enteredOtp: otp});
+    if(verify.data.success){
+      toast.success(verify.data.message);
+      markAsDelivered(orderId)
+    }
+    else{
+      toast.error(verify.data.message);
+    }
+
   }
 
   useEffect(() => {
@@ -135,7 +166,14 @@ const TrackOrder = ({ url, user, longitude, latitude, setLatitude, setLongitude 
           </p>
         </div>
         <div>
-          <button className="delivered-btn" onClick={()=>{markAsDelivered(order._id)}}>Mark as Delivered</button>
+          { !isSubmit ? 
+          <button className="delivered-btn" onClick={()=>sendOtp(order._id)}>{spinner ? <div className="spinner"></div> : "Mark as Delivered"}</button> 
+          : 
+          <div className="submit-conatiner">
+            <p>Enter OTP send to {order.address.firstName} {order.address.lastName}</p>
+            <input type="number" placeholder="Enter OTP" onChange={(e)=>setOtp(e.target.value)}/>
+            <button onClick={()=>{submitOtp(order._id)}}>Submit OTP</button>
+          </div>}
         </div>
       </div>
     </div>

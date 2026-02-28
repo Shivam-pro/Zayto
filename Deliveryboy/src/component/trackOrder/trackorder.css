@@ -37,8 +37,46 @@
     padding: 10px 20px;
     border: none;
     border-radius: 10px;
+    width: 170px;
 }
 
+.submit-conatiner{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: white;
+}
+.submit-conatiner p{
+    font-size: 15px;
+}
+.submit-conatiner input{
+    padding: 10px 20px;
+    border-radius: 10px;
+}
+.submit-conatiner button{
+    background-color: tomato;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+}
+.spinner{
+    width: 20px;
+    height: 20px;
+    place-self: center;
+    border: 5px solid #ffffff;
+    border-top-color: tomato;
+    border-radius: 50%;
+    animation: rotate 1s infinite;
+}
+@keyframes rotate {
+    100%{
+        transform: rotate(360deg);
+    }
+}
 @media (max-width: 900px) {
     .map-container {
         flex-direction: column;

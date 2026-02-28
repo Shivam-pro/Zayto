@@ -14,10 +14,6 @@ const AllOrders = ({ url, user }) => {
             setAllOrders(response.data.orders);
         }
     }
-    const markAsDelivered = async(orderId)=>{
-        await axios.post(url + "/api/order/status", { orderId: orderId, status: "Delivered" });
-        deliveryOrders();
-    }
     useEffect(() => {
         deliveryOrders()
     }, [])
@@ -57,7 +53,6 @@ const AllOrders = ({ url, user }) => {
                                 <p>Items : {order.items.length}</p>
                                 <p>₹{order.amount}</p>
                                 <div className='btns'>
-                                <button className='accept-btn' onClick={()=>{markAsDelivered(order._id)}}>Mark as Delivered</button>
                                 <button className='accept-btn' onClick={()=>{nevigate("/trackorder", {state: order})}}>Start Tracking</button>
                                 </div>
                             </> :

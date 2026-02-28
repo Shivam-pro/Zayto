@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import validator from "validator";
 import orderModel from "../models/orderModels.js";
+import nodemailer from "nodemailer";
 
 // Login Delivery boy
 const loginDeliveryBoy = async (req, res) => {
@@ -94,4 +95,67 @@ const deliveryBoyOrders = async(req, res)=>{
     }
 }
 
-export { loginDeliveryBoy, registerDeliveryBoy, listValidOrders, updateDeliveryInfo, deliveryBoyOrders }
+function generateOTP(){
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
+// API for sending order otp
+const sendOrderOtp = async(req, res)=>{
+    try {
+        const order = await orderModel.findById(req.body.orderId).populate("userId");
+        if(!order){
+            return res.json({success: false, message: "Order not found"});
+        }
+        const otp = generateOTP();
+        const hashedOtp = await bcrypt.hash(otp, 10);
+        const expiry = new Date(Date.now() + 5*60000);
+
+        order.otp = hashedOtp;
+        order.otpExpiry = expiry;
+        await order.save();
+        // Send OTP via email
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_ADDRESS,
+                pass: process.env.APP_PASS
+            }
+        })
+        await transporter.sendMail({
+            from: process.env.EMAIL_ADDRESS,
+            to: order.address.email,
+            subject: "Your Delivery OTP",
+            text: `Your OTP for order ${order._id} is ${otp}. It expires in 5 minutes.`
+        })
+        res.json({success: true, message: "OTP send to user email"});
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: "Error sending otp"});
+    }
+}
+
+const verifyOtp = async(req, res)=>{
+    const {orderId, enteredOtp} = req.body;
+    try {
+        const order = await orderModel.findById(orderId);
+        if(!order || !order.otp){
+            return res.json({success: false, message: "No otp found"});
+        }
+        const isMatch = await bcrypt.compare(enteredOtp, order.otp)
+        if(isMatch && new Date() < order.otpExpiry){
+            order.status = "Delivered"
+            order.otp = null
+            order.otpExpiry = null
+            await order.save()
+            res.json({success: true, message: "Order Mark as Delivered"});
+        }
+        else{
+            res.json({success: false,message: "Invalid OTP or OTP expires"});
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({success: false, message: "Error Verification OTP"});
+    }
+}
+export { loginDeliveryBoy, registerDeliveryBoy, listValidOrders, updateDeliveryInfo, deliveryBoyOrders, sendOrderOtp, verifyOtp }
