@@ -2,7 +2,6 @@ import foodModel from "../models/foodModels.js";
 import fs from "fs";
 
 // Add food items
-
 const addFood = async (req, res) => {
     let image_filename = `${req.file.filename}`;
     const food = new foodModel({
@@ -72,5 +71,28 @@ const updateFood = async (req, res) => {
         res.json({ success: false, message: "Error updating food item" });
     }
 }
+const ratingFood = async (req, res) => {
+    try {
+        const { itemId, rating } = req.body;
+        if (!itemId || !rating) {
+            return res.json({ success: false, message: "ItemId and rating required" })
+        }
+        if (rating < 1 || rating > 5) {
+            return res.json({ success: false, message: 'Rating must be between 1 tp 5' });
+        }
+        const foodItem = await foodModel.findById(itemId);
+        if (!foodItem) {
+            return res.json({ success: false, message: "Food item not found" });
+        }
+        const newCount = foodItem.rating.count + 1;
+        const newAverage = (foodItem.rating.average*foodItem.rating.count + rating) / newCount
+        foodItem.rating.count = newCount;
+        foodItem.rating.average = newAverage;
+        await foodItem.save();
+        res.json({success: true, message: "ThankYou for rating", rating: foodItem.rating})
+    } catch (error) {
+        res.json({success: false, message: "Server error in rating"});
+    }
 
-export { addFood, listFood, removeFood, updateFood }
+}
+export { addFood, listFood, removeFood, updateFood, ratingFood }

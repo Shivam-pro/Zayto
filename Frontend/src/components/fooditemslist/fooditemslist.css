@@ -67,5 +67,14 @@
 .pluse-btn{
     background-color: #97ff97;
 }
+.rating-stars{
+    display: flex;
+}
+.rating-stars i{
+    color:#FFA500;
+}
+.rating-stars span{
+    margin-left: 10px;
+}
 @media (max-width: 700px) {
 }

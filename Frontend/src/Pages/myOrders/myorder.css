@@ -1,58 +1,113 @@
-.my-orders{
+.my-orders {
     margin: 50px 0px;
 }
-.my-orders .container{
+
+.my-orders .container {
     display: flex;
     flex-direction: column;
     gap: 20px;
     margin-top: 30px;
 }
-.my-orders-order{
-    display: grid;
-    grid-template-columns: 0.5fr 3fr 1fr 1fr 1fr;
+
+.all-order-items {
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 30px;
-    font-size: 14px;
-    padding: 10px 20px;
-    color: #454545;
-    border: 1px solid tomato;
+    gap: 20px;
 }
-.my-orders-order-delivery{
-    display: grid;
-    grid-template-columns: 0.5fr 2fr 1fr 1fr 2fr 1fr;
+
+.order-status {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 30px;
-    font-size: 14px;
-    padding: 10px 20px;
-    color: #454545;
-    border: 1px solid tomato;
 }
-.order-img img{
-    width: 100%;
+.order-food-card img {
+    height: 150px;
+    width: 150px;
 }
-.my-orders-order p span, .my-orders-order-delivery p span{
+
+.myorder-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #fff2ef;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.orderid {
+    font-weight: 600;
+}
+
+.status {
     color: tomato;
-    margin-right: 3px;
+    font-weight: 600;
 }
-.my-orders p b{
-    font-weight: 500;
-    color: #454545;
+
+.order-box {
+    padding: 10px;
+    border: 1px solid tomato;
+    border-radius: 10px;
 }
-.my-orders-order button, .my-orders-order-delivery button{
+
+.myorder-box-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.item-name {
+    font-weight: 600;
+    font-size: 15px;
+}
+
+.font {
+    font-size: 14px;
+}
+
+.track-btn {
     border: none;
-    padding: 12px 6px;
+    padding: 12px 12px;
     border-radius: 4px;
-    background-color: #ffe1e1;
+    background-color: tomato;
     cursor: pointer;
-    color: #454545;
+    color: white;
 }
+
+.rating {
+    display: flex;
+}
+
+.rating i {
+    margin-top: 10px;
+}
+
+.yellow {
+    color: #FFA500;
+}
+
+.display-flex {
+    display: flex;
+}
+
 @media (max-width: 900px) {
-    .my-orders-order, .my-orders-order-delivery{
+
+    .my-orders-order,
+    .my-orders-order-delivery {
         grid-template-columns: 1fr 2fr 1fr;
         row-gap: 5px;
         font-size: 12px;
     }
-    .my-orders-order button, .my-orders-order-delivery button{
+
+    .my-orders-order button,
+    .my-orders-order-delivery button {
         font-size: 10px;
+    }
+
+    .all-order-items {
+        justify-content: center;
     }
 }

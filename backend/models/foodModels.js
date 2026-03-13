@@ -6,6 +6,10 @@ const foodSchema = new mongoose.Schema({
     price: {type: Number, require: true},
     image: {type: String},
     category: {type: String, require: true},
+    rating: {
+        average: {type: Number, default: 0},
+        count: {type: Number, default: 0} 
+    }
 })
 
 const foodModel = mongoose.models.food || mongoose.model("food", foodSchema)
