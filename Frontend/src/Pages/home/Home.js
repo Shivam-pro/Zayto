@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import './Home.css'
 import Hearder from '../../components/header/Header'
 import Exploremenu from '../../components/exploremenu/Exploremenu'
 import Fooditemslist from '../../components/fooditemslist/Fooditemslists'
